@@ -1,0 +1,34 @@
+# Environment
+.env
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Output
+output/*.html
+output/*.pdf
+
+# Data
+*.csv
+*.xlsx
+data/
+
+# ChromaDB
+chroma_data/
+
+# Logs
+logs/
+*.log
