@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Research Agent — Multi-Agent Research System</title>
+    <meta name="description" content="Give it a topic. Watch AI agents research the web, analyze data, fact-check claims, and write a professional report — all in real-time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Background Particles -->
+    <div class="bg-particles" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">🔬</div>
+                <div>
+                    <h1 class="logo-text">AI Research Agent</h1>
+                    <p class="logo-sub">Multi-Agent Intelligence System</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge badge-accent">v1.0</span>
+                <span class="badge badge-green" id="status-badge">● Ready</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Input Section -->
+        <section class="input-section" id="input-section">
+            <div class="input-card">
+                <div class="input-header">
+                    <h2>What do you want to research?</h2>
+                    <p class="input-subtitle">Enter any topic. Our AI agents will search the web, analyze data, verify facts, and produce a comprehensive report.</p>
+                </div>
+
+                <div class="input-group">
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="topic-input"
+                            placeholder="e.g., Impact of AI on healthcare in 2025"
+                            maxlength="500"
+                            autocomplete="off"
+                        >
+                        <span class="input-icon">🔍</span>
+                    </div>
+
+                    <div class="input-extras">
+                        <details class="advanced-options">
+                            <summary>Advanced Options</summary>
+                            <div class="options-content">
+                                <label for="custom-instructions">Custom Instructions (optional)</label>
+                                <textarea
+                                    id="custom-instructions"
+                                    placeholder="e.g., Focus on European markets, include at least 5 statistics..."
+                                    rows="3"
+                                ></textarea>
+                            </div>
+                        </details>
+                    </div>
+
+                    <button class="btn-research" id="btn-research" onclick="startResearch()">
+                        <span class="btn-icon">🚀</span>
+                        <span class="btn-text">Start Research</span>
+                        <div class="btn-glow"></div>
+                    </button>
+                </div>
+
+                <!-- Example Topics -->
+                <div class="examples">
+                    <span class="examples-label">Try:</span>
+                    <button class="example-chip" onclick="setTopic(this)">AI in drug discovery</button>
+                    <button class="example-chip" onclick="setTopic(this)">Global EV market 2025</button>
+                    <button class="example-chip" onclick="setTopic(this)">Quantum computing applications</button>
+                    <button class="example-chip" onclick="setTopic(this)">Remote work productivity studies</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Research Dashboard -->
+        <section class="dashboard" id="dashboard" style="display: none;">
+            <!-- Pipeline Progress -->
+            <div class="pipeline-section">
+                <h3 class="section-title">Research Pipeline</h3>
+                <div class="pipeline">
+                    <div class="pipeline-step" id="step-planning" data-step="planning">
+                        <div class="step-indicator">
+                            <div class="step-dot"></div>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-name">Planning</span>
+                            <span class="step-agent">Orchestrator</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" id="step-researching" data-step="researching">
+                        <div class="step-indicator">
+                            <div class="step-dot"></div>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-name">Researching</span>
+                            <span class="step-agent">Researcher</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" id="step-analyzing" data-step="analyzing">
+                        <div class="step-indicator">
+                            <div class="step-dot"></div>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-name">Analyzing</span>
+                            <span class="step-agent">Analyst</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" id="step-fact_checking" data-step="fact_checking">
+                        <div class="step-indicator">
+                            <div class="step-dot"></div>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-name">Fact Checking</span>
+                            <span class="step-agent">Fact Checker</span>
+                        </div>
+                    </div>
+                    <div class="pipeline-connector"></div>
+                    <div class="pipeline-step" id="step-writing" data-step="writing">
+                        <div class="step-indicator">
+                            <div class="step-dot"></div>
+                        </div>
+                        <div class="step-info">
+                            <span class="step-name">Writing</span>
+                            <span class="step-agent">Writer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agent Activity Feed -->
+            <div class="activity-section">
+                <div class="agents-panel">
+                    <h3 class="section-title">Agent Activity</h3>
+                    <div class="agent-cards">
+                        <div class="agent-card" id="agent-orchestrator" data-agent="orchestrator">
+                            <div class="agent-icon">🎯</div>
+                            <div class="agent-name">Orchestrator</div>
+                            <div class="agent-status">Idle</div>
+                        </div>
+                        <div class="agent-card" id="agent-researcher" data-agent="researcher">
+                            <div class="agent-icon">🔍</div>
+                            <div class="agent-name">Researcher</div>
+                            <div class="agent-status">Idle</div>
+                        </div>
+                        <div class="agent-card" id="agent-analyst" data-agent="analyst">
+                            <div class="agent-icon">📊</div>
+                            <div class="agent-name">Analyst</div>
+                            <div class="agent-status">Idle</div>
+                        </div>
+                        <div class="agent-card" id="agent-fact_checker" data-agent="fact_checker">
+                            <div class="agent-icon">✅</div>
+                            <div class="agent-name">Fact Checker</div>
+                            <div class="agent-status">Idle</div>
+                        </div>
+                        <div class="agent-card" id="agent-writer" data-agent="writer">
+                            <div class="agent-icon">✍️</div>
+                            <div class="agent-name">Writer</div>
+                            <div class="agent-status">Idle</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feed-panel">
+                    <h3 class="section-title">
+                        Live Feed
+                        <span class="live-dot"></span>
+                    </h3>
+                    <div class="event-feed" id="event-feed">
+                        <div class="feed-empty">
+                            <div class="feed-empty-icon">📡</div>
+                            <p>Waiting for agent activity...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div class="results-section" id="results-section" style="display: none;">
+                <h3 class="section-title">📄 Research Report</h3>
+                <div class="result-actions">
+                    <button class="btn-view-report" id="btn-view-report" onclick="viewReport()">
+                        📄 View Full Report
+                    </button>
+                    <button class="btn-new-research" onclick="newResearch()">
+                        🔄 New Research
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
