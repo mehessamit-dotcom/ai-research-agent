@@ -48,7 +48,7 @@ This is a **production-grade multi-agent AI system** that automates deep researc
 
 ### 1. Clone & Install
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-research-agent.git
+git clone https://github.com/mehessamit-dotcom/ai-research-agent.git
 cd ai-research-agent
 pip install -r requirements.txt
 ```
